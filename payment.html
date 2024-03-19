@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+    <link rel="stylesheet" href="assets/css/Pay.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Order History</h1>
+        <table id="order-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Action</th> <!-- Added Action column for delete button -->
+                </tr>
+            </thead>
+            <tbody id="order-body">
+                <!-- Purchased products will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+ <!-- Payment form -->
+ <h2>Payment</h2>
+ <form id="payment-form">
+     <label for="card-number">Card Number:</label>
+     <input type="text" id="card-number" name="card-number" required>
+     <br>
+     <label for="expiration">Expiration Date:</label>
+     <input type="text" id="expiration" name="expiration" placeholder="MM/YYYY" required>
+     <br>
+     <label for="cvv">CVV:</label>
+     <input type="text" id="cvv" name="cvv" required>
+     <br>
+     <button type="submit">Pay Now</button>
+ </form>
+</div>
+
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 DanDev Shop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/Index.js"></script>
+    <script src="assets/js/pay.js"></script>
+    <script>
+        // Retrieve order data from localStorage
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+        // Get the table body element
+        const orderTableBody = document.getElementById('order-body');
+
+        // Function to delete an order
+        function deleteOrder(index) {
+            orders.splice(index, 1); // Remove the order from the array
+            localStorage.setItem('orders', JSON.stringify(orders)); // Update localStorage
+
+            // Re-render the table to reflect the changes
+            renderOrders();
+        }
+
+        // Function to render orders in the table
+        function renderOrders() {
+            orderTableBody.innerHTML = ''; // Clear the table body
+
+            // Populate the order history table
+            orders.forEach((order, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${order.product}</td>
+                    <td>${order.quantity}</td>
+                    <td>$${(order.price * order.quantity).toFixed(2)}</td>
+                    <td><button onclick="deleteOrder(${index})">Delete</button></td> <!-- Delete button -->
+                `;
+                orderTableBody.appendChild(row);
+            });
+        }
+
+        renderOrders(); // Initial rendering when page loads
+    </script>
+    
+</body>
+</html>
