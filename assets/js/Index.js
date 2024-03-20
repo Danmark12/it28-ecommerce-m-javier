@@ -22,7 +22,12 @@ function handleBuyButtonClick(event) {
         // Save updated orders to localStorage
         localStorage.setItem('orders', JSON.stringify(orders));
 
-        alert('Order placed successfully!');
+        // Ask the user if they want to proceed to payment
+        const confirmPurchase = confirm('Order placed successfully! Do you want to proceed to payment?');
+        if (confirmPurchase) {
+            // Redirect to payment page
+            window.location.href = 'payment.html';
+        }
     } else {
         alert('Please enter a valid quantity.');
     }

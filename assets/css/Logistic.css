@@ -1,0 +1,43 @@
+/* logistic.css */
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Card styles */
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Heading styles */
+h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+/* Paragraph styles */
+p {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/* Footer styles */
+.footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #666666;
+}
+
+/* Additional styles for the tracking number and delivery date */
+#tracking-number,
+#delivery-date {
+    font-weight: bold;
+}

@@ -3,11 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order History</title>
+    <title>Payment</title>
     <link rel="stylesheet" href="assets/css/Pay.css">
 </head>
 <body>
     <div class="container">
+        <div class="card">
+            <!-- Payment method selection -->
+            <h2>Select Payment Method</h2>
+            <label for="payment_method">Payment Method:</label>
+            <select id="payment_method" name="payment_method" onchange="togglePaymentDetails()">
+                <option value="credit_card">Credit Card</option>
+                <option value="gcash">GCash</option>
+                <option value="paypal">PayPal</option>
+            </select>
+
+            <!-- Credit Card Payment Details -->
+            <div id="credit_card_details" class="payment-details">
+                <form id="credit_card_form" action="/credit_card_payment_process" method="post">
+                    <h2>Credit Card Details</h2>
+                    <label for="cardholder_name">Cardholder Name</label>
+                    <input type="text" id="cardholder_name" name="cardholder_name" required>
+
+                    <label for="card_number">Card Number</label>
+                    <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" required>
+
+                    <label for="expiry_date">Expiration Date</label>
+                    <input type="date" id="expiry_date" name="expiry_date" required>
+
+                    <label for="cvv">CVV</label>
+                    <input type="password" id="cvv" name="cvv" maxlength="3" required>
+
+                    <input type="submit" value="Pay Now">
+                </form>
+            </div>
+
+            <!-- GCash Payment Details -->
+            <div id="gcash_details" class="payment-details" style="display: none;">
+                <h2>GCash Details</h2>
+                <p>Please transfer the total amount to the following GCash number:</p>
+                <p>GCash Number: 09123456789</p>
+                <p>Once payment is made, enter the confirmation code below and click "Confirm Payment":</p>
+                <label for="gcash_confirmation_code">Confirmation Code</label>
+                <input type="text" id="gcash_confirmation_code" name="gcash_confirmation_code" required>
+                <button onclick="confirmGCashPayment()">Confirm Payment</button>
+            </div>
+
+            <!-- PayPal Payment Details -->
+            <div id="paypal_details" class="payment-details" style="display: none;">
+                <h2>PayPal Details</h2>
+                <p>Please transfer the total amount to the following PayPal account:</p>
+                <p>PayPal Email: danmarkpetalcurin@gmail.com</p>
+                <p>Once payment is made, enter the confirmation code below and click "Confirm Payment":</p>
+                <label for="paypal_confirmation_code">Confirmation Code</label>
+                <input type="text" id="paypal_confirmation_code" name="paypal_confirmation_code" required>
+                <button onclick="confirmPayPalPayment()">Confirm Payment</button>
+            </div>
+        </div>
+
         <div class="card">
             <h1>Order History</h1>
             <table id="order-table">
@@ -24,26 +77,6 @@
                 </tbody>
             </table>
         </div>
-        
-        <div class="card">
-            <!-- Payment form -->
-            <form action="/payment_process" method="post">
-                <h2>Payment Details</h2>
-                <label for="cardholder_name">Cardholder Name</label>
-                <input type="text" id="cardholder_name" name="cardholder_name" required>
-
-                <label for="card_number">Card Number</label>
-                <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" required>
-
-                <label for="expiry_date">Expiration Date</label>
-                <input type="date" id="expiry_date" name="expiry_date" required>
-
-                <label for="cvv">CVV</label>
-                <input type="password" id="cvv" name="cvv" maxlength="3" required>
-
-                <input type="submit" value="Pay Now">
-            </form>
-        </div>
     </div>
 
     <footer class="footer">
@@ -55,6 +88,52 @@
     <script src="assets/js/Index.js"></script>
     <script src="assets/js/pay.js"></script>
     <script>
+        // Function to toggle display of payment details based on selected payment method
+        function togglePaymentDetails() {
+            const paymentMethod = document.getElementById('payment_method').value;
+            const paymentDetails = document.querySelectorAll('.payment-details');
+
+            // Hide all payment details sections
+            paymentDetails.forEach(details => {
+                details.style.display = 'none';
+            });
+
+            // Show payment details section based on selected payment method
+            document.getElementById(`${paymentMethod}_details`).style.display = 'block';
+        }
+
+        // Function to confirm GCash payment
+        function confirmGCashPayment() {
+            const confirmationCode = document.getElementById('gcash_confirmation_code').value;
+            
+            // Here, you can implement your logic to verify the confirmation code and process the payment
+            // For demonstration purposes, let's assume a simple check for a valid code
+            
+            if (confirmationCode === "123456") {
+                alert('GCash payment confirmed. Thank you!');
+                // You can add further logic here, such as updating the UI to indicate successful payment
+            } else {
+                alert('Invalid confirmation code. Please try again.');
+                // You can add further logic here, such as displaying an error message to the user
+            }
+        }
+
+        // Function to confirm PayPal payment
+        function confirmPayPalPayment() {
+            const confirmationCode = document.getElementById('paypal_confirmation_code').value;
+            
+            // Here, you can implement your logic to verify the confirmation code and process the payment
+            // For demonstration purposes, let's assume a simple check for a valid code
+            
+            if (confirmationCode === "654321") {
+                alert('PayPal payment confirmed. Thank you!');
+                // You can add further logic here, such as updating the UI to indicate successful payment
+            } else {
+                alert('Invalid confirmation code. Please try again.');
+                // You can add further logic here, such as displaying an error message to the user
+            }
+        }
+
         // Retrieve order data from localStorage
         let orders = JSON.parse(localStorage.getItem('orders')) || [];
 
@@ -70,21 +149,46 @@
             renderOrders();
         }
 
+        // Function to update the quantity of an order
+        function updateQuantity(index, newQuantity) {
+            orders[index].quantity = newQuantity; // Update the quantity
+            localStorage.setItem('orders', JSON.stringify(orders)); // Update localStorage
+
+            // Re-render the table to reflect the changes
+            renderOrders();
+        }
+
         // Function to render orders in the table
         function renderOrders() {
             orderTableBody.innerHTML = ''; // Clear the table body
 
+            let totalPrice = 0; // Initialize total price
+
             // Populate the order history table
             orders.forEach((order, index) => {
                 const row = document.createElement('tr');
+               
+                const subtotal = order.price * order.quantity;
+                totalPrice += subtotal; // Add subtotal to total price
                 row.innerHTML = `
                     <td>${order.product}</td>
-                    <td>${order.quantity}</td>
-                    <td>$${(order.price * order.quantity).toFixed(2)}</td>
-                    <td><button onclick="deleteOrder(${index})">Delete</button></td> <!-- Delete button -->
+                    <td>
+                        <input type="number" min="1" value="${order.quantity}" onchange="updateQuantity(${index}, this.value)">
+                    </td>
+                    <td>$${subtotal.toFixed(2)}</td>
+                    <td><button onclick="deleteOrder(${index})">Delete</button></td>
                 `;
                 orderTableBody.appendChild(row);
             });
+
+            // Add row for total price
+            const totalRow = document.createElement('tr');
+            totalRow.innerHTML = `
+                <td colspan="2"><strong>Total:</strong></td>
+                <td><strong>$${totalPrice.toFixed(2)}</strong></td>
+                <td></td>
+            `;
+            orderTableBody.appendChild(totalRow);
         }
 
         renderOrders(); // Initial rendering when page loads
