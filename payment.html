@@ -8,38 +8,43 @@
 </head>
 <body>
     <div class="container">
-        <h1>Order History</h1>
-        <table id="order-table">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Action</th> <!-- Added Action column for delete button -->
-                </tr>
-            </thead>
-            <tbody id="order-body">
-                <!-- Purchased products will be dynamically inserted here -->
-            </tbody>
-        </table>
+        <div class="card">
+            <h1>Order History</h1>
+            <table id="order-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Action</th> <!-- Added Action column for delete button -->
+                    </tr>
+                </thead>
+                <tbody id="order-body">
+                    <!-- Purchased products will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="card">
+            <!-- Payment form -->
+            <form action="/payment_process" method="post">
+                <h2>Payment Details</h2>
+                <label for="cardholder_name">Cardholder Name</label>
+                <input type="text" id="cardholder_name" name="cardholder_name" required>
+
+                <label for="card_number">Card Number</label>
+                <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" required>
+
+                <label for="expiry_date">Expiration Date</label>
+                <input type="date" id="expiry_date" name="expiry_date" required>
+
+                <label for="cvv">CVV</label>
+                <input type="password" id="cvv" name="cvv" maxlength="3" required>
+
+                <input type="submit" value="Pay Now">
+            </form>
+        </div>
     </div>
-
- <!-- Payment form -->
- <h2>Payment</h2>
- <form id="payment-form">
-     <label for="card-number">Card Number:</label>
-     <input type="text" id="card-number" name="card-number" required>
-     <br>
-     <label for="expiration">Expiration Date:</label>
-     <input type="text" id="expiration" name="expiration" placeholder="MM/YYYY" required>
-     <br>
-     <label for="cvv">CVV:</label>
-     <input type="text" id="cvv" name="cvv" required>
-     <br>
-     <button type="submit">Pay Now</button>
- </form>
-</div>
-
 
     <footer class="footer">
         <div class="container">
@@ -84,6 +89,5 @@
 
         renderOrders(); // Initial rendering when page loads
     </script>
-    
 </body>
 </html>
