@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="assets/css/Pay.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Product Inventory</a></li>
+                <li><a href="payment.html">Payment</a></li>
+                <li><a href="Logistics.html" onclick="displayLogisticPage()">Logistics</a></li>
+                <li><a href="CustomerServise.html">Customer Service</a></li>
+                <li><a href="#">Reports</a></li>
+            </ul>
+        </nav>
+    </header>
     <div class="container">
         <div class="card">
             <!-- Payment method selection -->
@@ -34,7 +45,7 @@
                     <label for="cvv">CVV</label>
                     <input type="password" id="cvv" name="cvv" maxlength="3" required>
 
-                    <input type="submit" value="Pay Now">
+                    <input type="button" value="Pay Now" onclick="confirmAndRedirectToLogistic()">
                 </form>
             </div>
 
@@ -46,7 +57,7 @@
                 <p>Once payment is made, enter the confirmation code below and click "Confirm Payment":</p>
                 <label for="gcash_confirmation_code">Confirmation Code</label>
                 <input type="text" id="gcash_confirmation_code" name="gcash_confirmation_code" required>
-                <button onclick="confirmGCashPayment()">Confirm Payment</button>
+                <button onclick="confirmAndRedirectToLogistic()">Confirm Payment</button>
             </div>
 
             <!-- PayPal Payment Details -->
@@ -57,7 +68,7 @@
                 <p>Once payment is made, enter the confirmation code below and click "Confirm Payment":</p>
                 <label for="paypal_confirmation_code">Confirmation Code</label>
                 <input type="text" id="paypal_confirmation_code" name="paypal_confirmation_code" required>
-                <button onclick="confirmPayPalPayment()">Confirm Payment</button>
+                <button onclick="confirmAndRedirectToLogistic()">Confirm Payment</button>
             </div>
         </div>
 
@@ -102,96 +113,18 @@
             document.getElementById(`${paymentMethod}_details`).style.display = 'block';
         }
 
-        // Function to confirm GCash payment
-        function confirmGCashPayment() {
-            const confirmationCode = document.getElementById('gcash_confirmation_code').value;
-            
-            // Here, you can implement your logic to verify the confirmation code and process the payment
-            // For demonstration purposes, let's assume a simple check for a valid code
-            
-            if (confirmationCode === "123456") {
-                alert('GCash payment confirmed. Thank you!');
-                // You can add further logic here, such as updating the UI to indicate successful payment
-            } else {
-                alert('Invalid confirmation code. Please try again.');
-                // You can add further logic here, such as displaying an error message to the user
+        // Function to confirm payment and redirect to logistic page
+        function confirmAndRedirectToLogistic() {
+            if (window.confirm('Are you sure you want to proceed with the payment?')) {
+                window.location.href = 'logistic.html';
             }
         }
-
-        // Function to confirm PayPal payment
-        function confirmPayPalPayment() {
-            const confirmationCode = document.getElementById('paypal_confirmation_code').value;
-            
-            // Here, you can implement your logic to verify the confirmation code and process the payment
-            // For demonstration purposes, let's assume a simple check for a valid code
-            
-            if (confirmationCode === "654321") {
-                alert('PayPal payment confirmed. Thank you!');
-                // You can add further logic here, such as updating the UI to indicate successful payment
-            } else {
-                alert('Invalid confirmation code. Please try again.');
-                // You can add further logic here, such as displaying an error message to the user
-            }
-        }
-
-        // Retrieve order data from localStorage
-        let orders = JSON.parse(localStorage.getItem('orders')) || [];
-
-        // Get the table body element
-        const orderTableBody = document.getElementById('order-body');
-
-        // Function to delete an order
-        function deleteOrder(index) {
-            orders.splice(index, 1); // Remove the order from the array
-            localStorage.setItem('orders', JSON.stringify(orders)); // Update localStorage
-
-            // Re-render the table to reflect the changes
-            renderOrders();
-        }
-
-        // Function to update the quantity of an order
-        function updateQuantity(index, newQuantity) {
-            orders[index].quantity = newQuantity; // Update the quantity
-            localStorage.setItem('orders', JSON.stringify(orders)); // Update localStorage
-
-            // Re-render the table to reflect the changes
-            renderOrders();
-        }
-
-        // Function to render orders in the table
-        function renderOrders() {
-            orderTableBody.innerHTML = ''; // Clear the table body
-
-            let totalPrice = 0; // Initialize total price
-
-            // Populate the order history table
-            orders.forEach((order, index) => {
-                const row = document.createElement('tr');
-               
-                const subtotal = order.price * order.quantity;
-                totalPrice += subtotal; // Add subtotal to total price
-                row.innerHTML = `
-                    <td>${order.product}</td>
-                    <td>
-                        <input type="number" min="1" value="${order.quantity}" onchange="updateQuantity(${index}, this.value)">
-                    </td>
-                    <td>$${subtotal.toFixed(2)}</td>
-                    <td><button onclick="deleteOrder(${index})">Delete</button></td>
-                `;
-                orderTableBody.appendChild(row);
-            });
-
-            // Add row for total price
-            const totalRow = document.createElement('tr');
-            totalRow.innerHTML = `
-                <td colspan="2"><strong>Total:</strong></td>
-                <td><strong>$${totalPrice.toFixed(2)}</strong></td>
-                <td></td>
-            `;
-            orderTableBody.appendChild(totalRow);
-        }
-
-        renderOrders(); // Initial rendering when page loads
     </script>
+   
+   <script>
+    function displayLogisticPage() {
+        window.location.href = 'logistic.html';
+    }
+</script>
 </body>
 </html>

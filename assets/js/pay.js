@@ -57,3 +57,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
   renderOrders(); // Initial rendering when page loads
 });
+// Function to confirm GCash payment
+function confirmGCashPayment() {
+    // Assuming you have retrieved the product details from somewhere
+    const orderedProduct = {
+        id: '123456', // Example product ID
+        name: 'Example Product',
+        price: 100 // Example product price
+        // Add any other necessary product details
+    };
+    localStorage.setItem('orderedProduct', JSON.stringify(orderedProduct)); // Store product details in localStorage
+    window.location.href = 'logistic.html'; // Redirect to logistic.html
+}
+
+// Function to confirm PayPal payment
+function confirmPayPalPayment() {
+    // Similar to confirmGCashPayment, store product details and redirect
+    const orderedProduct = {
+        id: '123456', 
+        name: 'Example Product',
+        price: 100 
+    };
+    localStorage.setItem('orderedProduct', JSON.stringify(orderedProduct));
+    window.location.href = 'logistic.html';
+}

@@ -1,3 +1,30 @@
+header {
+    background-color: #333; /* Dark gray background */
+    padding: 10px 0; /* Add padding to create space around the navigation */
+}
+
+nav ul {
+    list-style-type: none; /* Remove default list styles */
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Align navigation links to the center */
+}
+
+nav ul li {
+    display: inline; /* Display list items inline */
+    margin-right: 20px; /* Add margin between navigation items */
+}
+
+nav ul li a {
+    color: #fff; /* White text color */
+    text-decoration: none; /* Remove underline from links */
+    font-size: 18px; /* Set font size for navigation links */
+}
+
+nav ul li a:hover {
+    text-decoration: underline; /* Underline links on hover */
+}
+
 /* Homepage container styles */
 .homepage-container {
     background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDi1lJ9ry2Um7opMeVbbUE5cFtyGZNmls2yg&usqp=CAU'); /* Background photo URL */
