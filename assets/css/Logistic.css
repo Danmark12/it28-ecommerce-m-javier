@@ -1,0 +1,142 @@
+/* Navbar CSS */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&display=swap');
+
+:root {
+    --melorraOrange: #f05a00;
+    --blueShade1: #2c3e50;
+}
+
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: var(--blueShade1);
+    font-family: 'Montserrat', sans-serif;
+    width: 40rem;
+    font-weight: 300;
+    min-height: 100vh;
+    position: relative;
+    display: block;
+    margin: 2rem auto;
+}
+
+.root {
+    padding: 3rem 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2rem 6rem
+    rgba(0,0,0,0.3);
+}
+
+figure {
+    display: flex;
+}
+
+figure img {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    border: 1px solid var(--melorraOrange);
+    margin-right: 1.5rem;
+}
+
+figure figcaption {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+h4 {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+h6 {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+h2 {
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.order-track {
+    margin-top: 2rem;
+}
+
+.order-track-step {
+    display: flex;
+    height: 7rem;
+}
+
+.order-track-step:last-child {
+    overflow: hidden;
+    height: 4rem;
+}
+
+.order-track-status {
+    margin-right: 1.5rem;
+    position: relative;
+}
+
+.order-track-status-dot {
+    display: block;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: var(--melorraOrange);
+}
+
+.order-track-status-line {
+    display: block;
+    margin: 0 auto;
+    width: 2px;
+    height: 7rem;
+    background: var(--melorraOrange);
+}
+
+.order-track-text {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.order-track-text-sub {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.current-step {
+    /* Add styles to highlight the current shipping status */
+    background-color: #f0f0f0; /* Example background color */
+    border-radius: 5px; /* Example border radius */
+}

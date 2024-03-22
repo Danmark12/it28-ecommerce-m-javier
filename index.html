@@ -3,62 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DanDev Shop</title>
+    <title>E-commerce Shop</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <header>
-        <h1>E-commerce Shop</h1>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="index.html">Product Inventory</a></li>
+                <li><a href="payment.html">Payment</a></li>
+                <li><a href="Logistics.html" onclick="displayLogisticPage()">Logistics</a></li>
+                <li><a href="CustomerServise.html">Customer Service</a></li>
+                <li><a href="#">Reports</a></li>
             </ul>
         </nav>
     </header>
-
+    <div class="homepage-container">
+        
+        <!-- Your homepage content goes here -->
+    </div>
+    <h1>Welcome to DanDev Shop</h1> <!-- Title added here -->
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <h2>Product Inventory</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-           
+        <!-- Product cards go here -->
+<!-- Product 1 -->
+        <div class="product">
+            <img src="https://www.petexpress.com.ph/cdn/shop/products/10164263_3_130x.jpg?v=1626330570" alt="Product 1">
+            <h2>Cosi Pet's Milk 1L (2 cartons)</h2>
+            <p>For Cats and Dogs of All Breeds and Life Stages</p>
+            <p>P 380.00</p>
+            <input type="number" value="1" min="1" class="quantity"> <!-- Quantity input -->
+            <button class="buy-btn">Buy</button>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product">
+            <img src="https://www.petexpress.com.ph/cdn/shop/products/FCN-Urinary-Packshot_130x.jpg?v=1626849543" alt="Product 2">
+            <h2>Royal Canin Feline Care Nutrition Adult Urinary Care Dry Cat Food 2kg</h2>
+            <p>Royal Canin Dry Food</p>
+            <p>P 1,390.00</p>
+            <input type="number" value="1" min="1" class="quantity"> <!-- Quantity input -->
+            <button class="buy-btn">Buy</button>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product">
+            <img src="https://www.petexpress.com.ph/cdn/shop/products/10265265-1_130x.jpg?v=1620404867" alt="Product 3">
+            <h2>SmartHeart Refine Adult Tuna with Crab Stick in Jelly Wet Cat Food 70g (12 pouches)</h2>
+            <p>SmartHeart Wet Food.</p>
+            <p>	P 468.00</p>
+            <input type="number" value="1" min="1" class="quantity"> <!-- Quantity input -->
+            <button class="buy-btn">Buy</button>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product">
+            <img src="https://www.petexpress.com.ph/cdn/shop/products/10266056-Kit-Cat-Tuna-Mackerel-Grain-Free-400g-_2-cans_-a_130x.jpg?v=1618361806" alt="Product 4">
+            <h2>Kit Cat Grain Free Tuna and Mackerel Wet Cat Food 400g (2 cans)</h2>
+            <p>Kit Cat Grain Free Tuna and Mackerel Wet Cat Food</p>
+            <p>P 178.00</p>
+            <input type="number" value="1" min="1" class="quantity"> <!-- Quantity input -->
+            <button class="buy-btn">Buy</button>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product">
+            <img src="https://www.petexpress.com.ph/cdn/shop/products/10211445-Sheba-Adult-Tuna-and-Salmon-Wet-Cat-Food-70g-_12-pouches_-front_130x.jpg?v=1645427659 " alt="Product 5">
+            <h2>Sheba Adult Tuna and Salmon Wet Cat Food 70g (12 pouches)</h2>
+            <p>Sheba Wet Food</p>
+            <p>	P 540.00</p>
+            <input type="number" value="1" min="1" class="quantity"> <!-- Quantity input -->
+            <button class="buy-btn">Buy</button>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product">
+            <img src="https://www.petexpress.com.ph/cdn/shop/products/10266052-Kit-Cat-Tuna-Crab-Grain-Free-400g-_2-cans_-c_200x.jpg?v=1626338720" alt="Product 6">
+            <h2>Kit Cat Grain Free Tuna and Crab Wet Cat Food 400g (2 cans)</h2>
+            <p>Cat Food.</p>
+            <p>P 178.00</p>
+            <input type="number" value="1" min="1" class="quantity"> <!-- Quantity input -->
+            <button class="buy-btn">Buy</button>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="product">
+            <img src="https://www.petexpress.com.ph/cdn/shop/products/10228473-Kit-Cat-Deboned-Chicken-_-Beef-80g-_6-cans_-b_200x.jpg?v=1626330412" alt="Product 7">
+            <h2>Kit Cat Deboned Chicken and Beef Wet Cat Food 80g (6 cans)</h2>
+            <p>Cat Food.</p>
+            <p>P 354.00</p>
+            <input type="number" value="1" min="1" class="quantity"> <!-- Quantity input -->
+            <button class="buy-btn">Buy</button>
+        </div>       
+        <!-- Product 8 -->
+        <div class="product">
+            <img src="https://www.petexpress.com.ph/cdn/shop/products/10265266-2_200x.jpg?v=1619367027" alt="Product 8">
+            <h2>Product 8</h2>
+            <p>Cat Food.</p>
+            <p>P 468.00</p>
+            <input type="number" value="1" min="1" class="quantity"> <!-- Quantity input -->
+            <button class="buy-btn">Buy</button>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2024 E-commerce Shop. All rights reserved.</p>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 DanDev Shop. All rights reserved.</p>
+        </div>
     </footer>
+    <script src="assets/js/Index.js"></script>
+    <script>
+        function displayLogisticPage() {
+            window.location.href = 'logistic.html';
+        }
+    </script>s
 </body>
 </html>

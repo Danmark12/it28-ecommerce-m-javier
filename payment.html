@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="assets/css/Pay.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Product Inventory</a></li>
+                <li><a href="payment.html">Payment</a></li>
+                <li><a href="Logistics.html" onclick="displayLogisticPage()">Logistics</a></li>
+                <li><a href="CustomerServise.html">Customer Service</a></li>
+                <li><a href="#">Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="card">
+            <!-- Payment method selection -->
+            <h2>Select Payment Method</h2>
+            <label for="payment_method">Payment Method:</label>
+            <select id="payment_method" name="payment_method" onchange="togglePaymentDetails()">
+                <option value="credit_card">Credit Card</option>
+                <option value="gcash">GCash</option>
+                <option value="paypal">PayPal</option>
+            </select>
+
+            <!-- Credit Card Payment Details -->
+            <div id="credit_card_details" class="payment-details">
+                <form id="credit_card_form" action="/credit_card_payment_process" method="post">
+                    <h2>Credit Card Details</h2>
+                    <label for="cardholder_name">Cardholder Name</label>
+                    <input type="text" id="cardholder_name" name="cardholder_name" required>
+
+                    <label for="card_number">Card Number</label>
+                    <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" required>
+
+                    <label for="expiry_date">Expiration Date</label>
+                    <input type="date" id="expiry_date" name="expiry_date" required>
+
+                    <label for="cvv">CVV</label>
+                    <input type="password" id="cvv" name="cvv" maxlength="3" required>
+
+                    <input type="button" value="Pay Now" onclick="confirmAndRedirectToLogistic()">
+                </form>
+            </div>
+
+            <!-- GCash Payment Details -->
+            <div id="gcash_details" class="payment-details" style="display: none;">
+                <h2>GCash Details</h2>
+                <p>Please transfer the total amount to the following GCash number:</p>
+                <p>GCash Number: 09123456789</p>
+                <p>Once payment is made, enter the confirmation code below and click "Confirm Payment":</p>
+                <label for="gcash_confirmation_code">Confirmation Code</label>
+                <input type="text" id="gcash_confirmation_code" name="gcash_confirmation_code" required>
+                <button onclick="confirmAndRedirectToLogistic()">Confirm Payment</button>
+            </div>
+
+            <!-- PayPal Payment Details -->
+            <div id="paypal_details" class="payment-details" style="display: none;">
+                <h2>PayPal Details</h2>
+                <p>Please transfer the total amount to the following PayPal account:</p>
+                <p>PayPal Email: danmarkpetalcurin@gmail.com</p>
+                <p>Once payment is made, enter the confirmation code below and click "Confirm Payment":</p>
+                <label for="paypal_confirmation_code">Confirmation Code</label>
+                <input type="text" id="paypal_confirmation_code" name="paypal_confirmation_code" required>
+                <button onclick="confirmAndRedirectToLogistic()">Confirm Payment</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h1>Order History</h1>
+            <table id="order-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Action</th> <!-- Added Action column for delete button -->
+                    </tr>
+                </thead>
+                <tbody id="order-body">
+                    <!-- Purchased products will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 DanDev Shop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/Index.js"></script>
+    <script src="assets/js/pay.js"></script>
+    <script>
+        // Function to toggle display of payment details based on selected payment method
+        function togglePaymentDetails() {
+            const paymentMethod = document.getElementById('payment_method').value;
+            const paymentDetails = document.querySelectorAll('.payment-details');
+
+            // Hide all payment details sections
+            paymentDetails.forEach(details => {
+                details.style.display = 'none';
+            });
+
+            // Show payment details section based on selected payment method
+            document.getElementById(`${paymentMethod}_details`).style.display = 'block';
+        }
+
+        // Function to confirm payment and redirect to logistic page
+        function confirmAndRedirectToLogistic() {
+            if (window.confirm('Are you sure you want to proceed with the payment?')) {
+                window.location.href = 'logistic.html';
+            }
+        }
+    </script>
+   
+   <script>
+    function displayLogisticPage() {
+        window.location.href = 'logistic.html';
+    }
+</script>
+</body>
+</html>
